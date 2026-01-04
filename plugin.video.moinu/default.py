@@ -78,6 +78,6 @@ try:
 except Exception as e:
     xbmcgui.Dialog().notification(
         "Moinu Movies",
-        "JSON / Network error",
+        "JSON / TMDB Network Error",
         xbmcgui.NOTIFICATION_ERROR
     )
