@@ -7,21 +7,22 @@
       "language": "Hindi / Tamil / Telugu / Kannada / Malayalam",
       "quality": "1080p x264",
       "size": "NF WEB-DL",
-      "play_url": "https://dl.dropboxusercontent.com/scl/fi/pd2dw9fl7hvbaeidljmx5/Aaryan.2025.1080p.NF.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.x264-KuTTaN.mkv?rlkey=dssuoa4yfl5udxxvlvp1lyp5i&st=2r3gwhtt&dl=1",
+      "play_url": "https://dl.dropboxusercontent.com/scl/fi/pd2dw9fl7hvbaeidljmx5/Aaryan.2025.1080p.NF.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.x264-KuTTaN.mkv?dl=1",
       "poster": "https://image.tmdb.org/t/p/original/rRjh3zumdW89fNMe4tdjmALB1xG.jpg",
       "fanart": "https://image.tmdb.org/t/p/original/ngWMCXLzr50x50JFWEz6jTkYowO.jpg",
       "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=kmUmjib0-20"
+    },
+
+    {
+      "title": "Kantara (2022)",
+      "year": 2022,
+      "language": "Kannada / Hindi / Tamil / Telugu / Malayalam",
+      "quality": "1080p x264",
+      "size": "AMZN WEB-DL",
+      "play_url": "https://dl.dropboxusercontent.com/scl/fi/02th5evgbzqja2rf076tj/Kantara.Chapter.1.2025.1080p.AMZN.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.H.264-Telly.mkv",
+      "poster": "https://image.tmdb.org/t/p/original/i3OVoFxHkdeuxaJcxf0GEb62la7.jpg",
+      "fanart": "https://image.tmdb.org/t/p/original/bWFCA3icHPoYgRO2yhIJze4FvpR.jpg",
+      "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=fUwMWzdeXyc"
     }
   ]
-},
-{
-  "title": "Kantara (2022)",
-  "year": 2022,
-  "language": "Kannada / Hindi / Tamil / Telugu / Malayalam",
-  "quality": "1080p x264",
-  "size": "AMZN WEB-DL",
-  "play_url": "https://dl.dropboxusercontent.com/scl/fi/02th5evgbzqja2rf076tj/Kantara.Chapter.1.2025.1080p.AMZN.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.H.264-Telly.mkv?dl=1",
-  "poster": "https://image.tmdb.org/t/p/original/i3OVoFxHkdeuxaJcxf0GEb62la7.jpg",
-  "fanart": "https://image.tmdb.org/t/p/original/bWFCA3icHPoYgRO2yhIJze4FvpR.jpg",
-  "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=fUwMWzdeXyc"
 }
