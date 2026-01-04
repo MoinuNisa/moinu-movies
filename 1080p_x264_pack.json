@@ -13,4 +13,15 @@
       "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=kmUmjib0-20"
     }
   ]
+},
+{
+  "title": "Kantara (2022)",
+  "year": 2022,
+  "language": "Kannada / Hindi / Tamil / Telugu / Malayalam",
+  "quality": "1080p x264",
+  "size": "AMZN WEB-DL",
+  "play_url": "https://dl.dropboxusercontent.com/scl/fi/02th5evgbzqja2rf076tj/Kantara.Chapter.1.2025.1080p.AMZN.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.H.264-Telly.mkv?dl=1",
+  "poster": "https://image.tmdb.org/t/p/original/i3OVoFxHkdeuxaJcxf0GEb62la7.jpg",
+  "fanart": "https://image.tmdb.org/t/p/original/bWFCA3icHPoYgRO2yhIJze4FvpR.jpg",
+  "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=fUwMWzdeXyc"
 }
