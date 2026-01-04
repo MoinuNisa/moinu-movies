@@ -12,6 +12,7 @@
       "fanart": "https://image.tmdb.org/t/p/original/ngWMCXLzr50x50JFWEz6jTkYowO.jpg",
       "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=kmUmjib0-20"
     },
+
     {
       "title": "Kantara (2022)",
       "year": 2022,
@@ -23,30 +24,52 @@
       "fanart": "https://image.tmdb.org/t/p/original/bWFCA3icHPoYgRO2yhIJze4FvpR.jpg",
       "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=fUwMWzdeXyc"
     },
+
     {
-  "title": "Dude (2025)",
-  "year": 2025,
-  "language": "Hindi / Tamil / Telugu / Kannada / Malayalam",
-  "quality": "1080p x264",
-  "size": "NF WEB-DL",
-  "play_url": "https://dl.dropboxusercontent.com/scl/fi/xxxrb2f3fc5ntx7nnd30n/Dude.2025.1080p.NF.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.H.264-WADU.mkv?rlkey=hrw45524qgj9o0c5xb80lhl16&st=sclrl8x2&dl=1",
-  "poster": "https://img.studioflicks.com/wp-content/uploads/2025/05/11194832/Dude-Movie-HD-Second-Look-Poster-576x1024.jpeg",
-  "fanart": "https://occ-0-2086-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABX6DaXOcBQSSRD1BPz6hW8S-48jZ4tPlB4QLwf7RVXgHGbzQdWikImKP4UUSwFsWqso1rteIUBIqpZBsIucL8GQGoEymYTPyFhvE.webp?r=bca",
-  "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=39x89Tl1vMI"
+      "title": "Dude (2025)",
+      "year": 2025,
+      "language": "Hindi / Tamil / Telugu / Kannada / Malayalam",
+      "quality": "1080p x264",
+      "size": "NF WEB-DL",
+      "play_url": "https://dl.dropboxusercontent.com/scl/fi/xxxrb2f3fc5ntx7nnd30n/Dude.2025.1080p.NF.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.H.264-WADU.mkv?rlkey=hrw45524qgj9o0c5xb80lhl16&st=sclrl8x2&dl=1",
+      "poster": "https://img.studioflicks.com/wp-content/uploads/2025/05/11194832/Dude-Movie-HD-Second-Look-Poster-576x1024.jpeg",
+      "fanart": "https://occ-0-2086-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABX6DaXOcBQSSRD1BPz6hW8S-48jZ4tPlB4QLwf7RVXgHGbzQdWikImKP4UUSwFsWqso1rteIUBIqpZBsIucL8GQGoEymYTPyFhvE.webp?r=bca",
+      "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=39x89Tl1vMI"
+    },
+
+    {
+      "title": "Madharaasi (2025)",
+      "year": 2025,
+      "language": "Tamil / Telugu / Hindi / Malayalam",
+      "quality": "1080p x264",
+      "size": "AMZN WEB-DL",
+      "play_url": "https://dl.dropboxusercontent.com/scl/fi0t4ljn6ee7klx03q8ms3u/Madharaasi.2025.1080p.AMZN.WEB-DL.MULTI.DDP5.1.H.264-MultiShows.mkv?rlkey=7h9fw0192i6nsn8awzfei726s&st=c6g5ijjy&dl=1",
+      "poster": "https://image.tmdb.org/t/p/original/rE96vTAGL8sJZwdRZCbQQuxAPSj.jpg",
+      "fanart": "https://image.tmdb.org/t/p/original/7mIbrRGwtBMbbpOZuIIBPqAG4sR.jpg",
+      "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=Hgw4S7SDo3U",
+
+      "extras": [
+        {
+          "label": "🎵 Theme Music",
+          "url": "plugin://plugin.video.youtube/?action=play_video&videoid=ukfbEmihsHo"
+        },
+        {
+          "label": "🔥 Animal Instincts",
+          "url": "plugin://plugin.video.youtube/?action=play_video&videoid=0ZrKzH5Jatk"
+        },
+        {
+          "label": "🎶 Song 1",
+          "url": "plugin://plugin.video.youtube/?action=play_video&videoid=G8g0ertPvHQ"
+        },
+        {
+          "label": "🎶 Song 2",
+          "url": "plugin://plugin.video.youtube/?action=play_video&videoid=xLalxOPXPA8"
+        },
+        {
+          "label": "🎶 Song 3",
+          "url": "plugin://plugin.video.youtube/?action=play_video&videoid=LYpjtQ7G_hE"
+        }
+      ]
     }
-    {
-  "title": "Madharaasi (2025)",
-  "year": 2025,
-  "language": "Tamil / Telugu / Hindi / Malayalam",
-  "quality": "1080p x264",
-  "size": "AMZN WEB-DL",
-  "play_url": "https://dl.dropboxusercontent.com/scl/fi0t4ljn6ee7klx03q8ms3u/Madharaasi.2025.1080p.AMZN.WEB-DL.MULTI.DDP5.1.H.264-MultiShows.mkv?rlkey=7h9fw0192i6nsn8awzfei726s&st=c6g5ijjy&dl=1",
-
-  "poster": "https://image.tmdb.org/t/p/original/rE96vTAGL8sJZwdRZCbQQuxAPSj.jpg",
-
-  "fanart": "https://image.tmdb.org/t/p/original/7mIbrRGwtBMbbpOZuIIBPqAG4sR.jpg",
-
-  "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=Hgw4S7SDo3U"
-}
   ]
 }
