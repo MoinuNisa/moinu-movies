@@ -1,0 +1,21 @@
+<addon id="plugin.video.moinu"
+       name="Moinu Movies"
+       version="1.0.0"
+       provider-name="Moinu">
+
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+
+    <extension point="xbmc.python.pluginsource"
+               library="default.py">
+        <provides>video</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Moinu Private Movies</summary>
+        <description>GitHub JSON based private movie list</description>
+        <platform>all</platform>
+    </extension>
+
+</addon>
