@@ -1,0 +1,16 @@
+{
+  "pack": "1080p x264",
+  "movies": [
+    {
+      "title": "Aaryan (2025)",
+      "year": 2025,
+      "language": "Hindi / Tamil / Telugu / Kannada / Malayalam",
+      "quality": "1080p x264",
+      "size": "NF WEB-DL",
+      "play_url": "https://dl.dropboxusercontent.com/scl/fi/pd2dw9fl7hvbaeidljmx5/Aaryan.2025.1080p.NF.WEB-DL.HIN-TAM-TEL-KAN-MAL.DDP5.1.x264-KuTTaN.mkv?dl=1",
+      "poster": "https://image.tmdb.org/t/p/original/rRjh3zumdW89fNMe4tdjmALB1xG.jpg",
+      "fanart": "https://image.tmdb.org/t/p/original/ngWMCXLzr50x50JFWEz6jTkYowO.jpg",
+      "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=kmUmjib0-20"
+    }
+  ]
+}
