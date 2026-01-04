@@ -15,22 +15,39 @@ try:
     for movie in data["movies"]:
         li = xbmcgui.ListItem(label=movie["title"])
 
-        # Poster + fanart support
+        # Artwork
         li.setArt({
             "thumb": movie.get("poster", ""),
             "poster": movie.get("poster", ""),
             "fanart": movie.get("fanart", "")
         })
 
-        # Optional info (future ready)
+        # Info labels
         li.setInfo("video", {
             "title": movie["title"],
-            "year": movie.get("year", "")
+            "year": movie.get("year", ""),
+            "plot": movie.get("plot", "")
         })
+
+        # Context menu
+        context_items = []
+
+        if movie.get("trailer"):
+            context_items.append((
+                "🎬 Trailer",
+                "RunPlugin({})".format(movie["trailer"])
+            ))
+
+        context_items.append((
+            "ℹ Movie Info",
+            "Action(Info)"
+        ))
+
+        li.addContextMenuItems(context_items)
 
         xbmcplugin.addDirectoryItem(
             handle=handle,
-            url=movie["play_url"],   # 🔥 CORRECT KEY
+            url=movie["play_url"],
             listitem=li,
             isFolder=False
         )
@@ -38,8 +55,4 @@ try:
     xbmcplugin.endOfDirectory(handle)
 
 except Exception as e:
-    xbmcgui.Dialog().notification(
-        "Moinu Movies",
-        "Failed to load movie list",
-        xbmcgui.NOTIFICATION_ERROR
-    )
+    xbmcgui.Dialog().ok("Moinu Movies ERROR", str(e))
