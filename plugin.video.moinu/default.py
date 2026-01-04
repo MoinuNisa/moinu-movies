@@ -17,11 +17,9 @@ handle = int(sys.argv[1])
 # ===============================
 def get_tmdb_info(title, year):
     try:
-        # Clean title (remove year from name if present)
         clean_title = title.split("(")[0].strip()
         query = clean_title.replace(" ", "%20")
 
-        # Search movie
         search_url = (
             f"https://api.themoviedb.org/3/search/movie"
             f"?api_key={TMDB_API_KEY}&query={query}&year={year}"
@@ -34,7 +32,6 @@ def get_tmdb_info(title, year):
         movie = search_data["results"][0]
         movie_id = movie.get("id")
 
-        # Basic info
         plot = movie.get("overview", "")
         poster_path = movie.get("poster_path")
         fanart_path = movie.get("backdrop_path")
@@ -43,24 +40,28 @@ def get_tmdb_info(title, year):
         poster = f"https://image.tmdb.org/t/p/original{poster_path}" if poster_path else ""
         fanart = f"https://image.tmdb.org/t/p/original{fanart_path}" if fanart_path else ""
 
-        # Credits (CAST)
+        # CAST
         cast_list = []
+        cast_names = []
+
         if movie_id:
             credits_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}"
             credits_data = json.loads(urlopen(credits_url).read().decode("utf-8"))
 
-            for c in credits_data.get("cast", [])[:8]:  # top 8 cast
+            for c in credits_data.get("cast", [])[:8]:
                 cast_list.append({
                     "name": c.get("name"),
                     "role": c.get("character")
                 })
+                cast_names.append(c.get("name"))
 
         return {
             "plot": plot,
             "poster": poster,
             "fanart": fanart,
             "rating": rating,
-            "cast": cast_list
+            "cast": cast_list,
+            "cast_text": ", ".join(cast_names)
         }
 
     except Exception:
@@ -85,15 +86,19 @@ try:
             "fanart": tmdb.get("fanart") or movie.get("fanart", "")
         })
 
-        # Info
+        # Plot + CAST TEXT (GUARANTEED VISIBLE)
+        plot_text = tmdb.get("plot", "")
+        if tmdb.get("cast_text"):
+            plot_text += "\n\nCast: " + tmdb.get("cast_text")
+
         li.setInfo("video", {
             "title": movie.get("title", ""),
             "year": movie.get("year", ""),
-            "plot": tmdb.get("plot", ""),
+            "plot": plot_text,
             "rating": tmdb.get("rating", 0)
         })
 
-        # Cast
+        # Still setCast (for skins that support it)
         if tmdb.get("cast"):
             li.setCast(tmdb["cast"])
 
@@ -107,7 +112,6 @@ try:
         context_items.append(("ℹ Movie Info", "Action(Info)"))
         li.addContextMenuItems(context_items)
 
-        # Add to Kodi
         xbmcplugin.addDirectoryItem(
             handle=handle,
             url=movie.get("play_url", ""),
