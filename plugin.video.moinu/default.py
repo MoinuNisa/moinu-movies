@@ -1,34 +1,33 @@
-import sys
-import json
+import xbmcplugin, xbmcgui, sys, json
 import urllib.request
-import xbmcplugin
-import xbmcgui
 
-HANDLE = int(sys.argv[1])
+URL = "https://raw.githubusercontent.com/MoinuNisa/moinu-movies/main/1080p_x264_pack.json"
 
-JSON_URL = "https://raw.githubusercontent.com/MoinuNisa/moinu-movies/main/1080p_x264_pack.json"
+handle = int(sys.argv[1])
 
-response = urllib.request.urlopen(JSON_URL)
-data = json.loads(response.read())
+try:
+    response = urllib.request.urlopen(URL)
+    data = json.loads(response.read().decode())
 
-for movie in data["movies"]:
-    li = xbmcgui.ListItem(label=movie["title"])
-    li.setArt({
-        "thumb": movie["poster"],
-        "poster": movie["poster"],
-        "fanart": movie["fanart"]
-    })
-    li.setInfo("video", {
-        "title": movie["title"],
-        "year": movie["year"],
-        "genre": movie["quality"]
-    })
+    for movie in data["movies"]:
+        li = xbmcgui.ListItem(label=movie["title"])
+        li.setArt({
+            "poster": movie.get("poster", ""),
+            "thumb": movie.get("poster", "")
+        })
+        xbmcplugin.addDirectoryItem(
+            handle=handle,
+            url=movie["url"],
+            listitem=li,
+            isFolder=False
+        )
 
-    xbmcplugin.addDirectoryItem(
-        handle=HANDLE,
-        url=movie["play_url"],
-        listitem=li,
-        isFolder=False
+    xbmcplugin.endOfDirectory(handle)
+
+except Exception as e:
+    xbmcgui.Dialog().notification(
+        "Moinu Movies",
+        "Failed to load movie list",
+        xbmcgui.NOTIFICATION_ERROR,
+        5000
     )
-
-xbmcplugin.endOfDirectory(HANDLE)
