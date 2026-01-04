@@ -34,5 +34,19 @@
   "fanart": "https://occ-0-2086-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABX6DaXOcBQSSRD1BPz6hW8S-48jZ4tPlB4QLwf7RVXgHGbzQdWikImKP4UUSwFsWqso1rteIUBIqpZBsIucL8GQGoEymYTPyFhvE.webp?r=bca",
   "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=39x89Tl1vMI"
     }
+    {
+  "title": "Madharaasi (2025)",
+  "year": 2025,
+  "language": "Tamil / Telugu / Hindi / Malayalam",
+  "quality": "1080p x264",
+  "size": "AMZN WEB-DL",
+  "play_url": "https://dl.dropboxusercontent.com/scl/fi0t4ljn6ee7klx03q8ms3u/Madharaasi.2025.1080p.AMZN.WEB-DL.MULTI.DDP5.1.H.264-MultiShows.mkv?rlkey=7h9fw0192i6nsn8awzfei726s&st=c6g5ijjy&dl=1",
+
+  "poster": "https://image.tmdb.org/t/p/original/rE96vTAGL8sJZwdRZCbQQuxAPSj.jpg",
+
+  "fanart": "https://image.tmdb.org/t/p/original/7mIbrRGwtBMbbpOZuIIBPqAG4sR.jpg",
+
+  "trailer": "plugin://plugin.video.youtube/?action=play_video&videoid=Hgw4S7SDo3U"
+}
   ]
 }
