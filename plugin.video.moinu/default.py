@@ -1,8 +1,10 @@
 import xbmcplugin
 import xbmcgui
+import xbmc
 import sys
 import json
-from urllib.request import urlopen
+import re
+from urllib.request import urlopen, Request
 
 # ===============================
 # CONFIG
@@ -11,6 +13,26 @@ TMDB_API_KEY = "051ccf72e026820cb53b8b8531b6a2ba"
 JSON_URL = "https://raw.githubusercontent.com/MoinuNisa/moinu-movies/main/1080p_x264_pack.json"
 
 handle = int(sys.argv[1])
+
+# ===============================
+# pCloud RESOLVER
+# ===============================
+def resolve_pcloud(page_url):
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
+        req = Request(page_url, headers=headers)
+        html = urlopen(req).read().decode("utf-8")
+
+        match = re.search(r'(https://e\.pcloud\.link[^"]+)', html)
+        if match:
+            return match.group(1)
+
+    except Exception as e:
+        xbmc.log(f"[MoinuMovies] pCloud resolve error: {e}", xbmc.LOGERROR)
+
+    return None
 
 # ===============================
 # TMDB HELPER
@@ -40,7 +62,6 @@ def get_tmdb_info(title, year):
         poster = f"https://image.tmdb.org/t/p/original{poster_path}" if poster_path else ""
         fanart = f"https://image.tmdb.org/t/p/original{fanart_path}" if fanart_path else ""
 
-        # CAST
         cast_list = []
         cast_names = []
 
@@ -86,7 +107,7 @@ try:
             "fanart": tmdb.get("fanart") or movie.get("fanart", "")
         })
 
-        # Plot + CAST TEXT (GUARANTEED VISIBLE)
+        # Plot + Cast
         plot_text = tmdb.get("plot", "")
         if tmdb.get("cast_text"):
             plot_text += "\n\nCast: " + tmdb.get("cast_text")
@@ -98,7 +119,6 @@ try:
             "rating": tmdb.get("rating", 0)
         })
 
-        # Still setCast (for skins that support it)
         if tmdb.get("cast"):
             li.setCast(tmdb["cast"])
 
@@ -112,9 +132,21 @@ try:
         context_items.append(("ℹ Movie Info", "Action(Info)"))
         li.addContextMenuItems(context_items)
 
+        # 🔥 PLAY ACTION (pCloud Runtime Resolve)
+        page_url = movie.get("play_url", "")
+        stream_url = resolve_pcloud(page_url)
+
+        if not stream_url:
+            xbmcgui.Dialog().notification(
+                "Moinu Movies",
+                "pCloud stream resolve failed",
+                xbmcgui.NOTIFICATION_ERROR
+            )
+            continue
+
         xbmcplugin.addDirectoryItem(
             handle=handle,
-            url=movie.get("play_url", ""),
+            url=stream_url,
             listitem=li,
             isFolder=False
         )
