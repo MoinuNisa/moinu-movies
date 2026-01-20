@@ -4,7 +4,13 @@ import xbmc
 import sys
 import json
 import re
+import ssl
 from urllib.request import urlopen, Request
+
+# ===============================
+# SSL FIX (VERY IMPORTANT FOR ANDROID)
+# ===============================
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # ===============================
 # CONFIG
@@ -19,23 +25,20 @@ handle = int(sys.argv[1])
 # ===============================
 def resolve_pcloud(page_url):
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0"
-        }
-        req = Request(page_url, headers=headers)
-        html = urlopen(req).read().decode("utf-8")
+        req = Request(page_url, headers={"User-Agent": "Mozilla/5.0"})
+        html = urlopen(req, timeout=20).read().decode("utf-8")
 
         match = re.search(r'(https://e\.pcloud\.link[^"]+)', html)
         if match:
             return match.group(1)
 
     except Exception as e:
-        xbmc.log(f"[MoinuMovies] pCloud resolve error: {e}", xbmc.LOGERROR)
+        xbmc.log("[MoinuMovies] pCloud resolve error: " + str(e), xbmc.LOGERROR)
 
     return None
 
 # ===============================
-# TMDB HELPER
+# TMDB HELPER (SAFE)
 # ===============================
 def get_tmdb_info(title, year):
     try:
@@ -43,10 +46,12 @@ def get_tmdb_info(title, year):
         query = clean_title.replace(" ", "%20")
 
         search_url = (
-            f"https://api.themoviedb.org/3/search/movie"
+            "https://api.themoviedb.org/3/search/movie"
             f"?api_key={TMDB_API_KEY}&query={query}&year={year}"
         )
-        search_data = json.loads(urlopen(search_url).read().decode("utf-8"))
+
+        req = Request(search_url, headers={"User-Agent": "Mozilla/5.0"})
+        search_data = json.loads(urlopen(req, timeout=15).read().decode("utf-8"))
 
         if not search_data.get("results"):
             return {}
@@ -54,51 +59,40 @@ def get_tmdb_info(title, year):
         movie = search_data["results"][0]
         movie_id = movie.get("id")
 
-        plot = movie.get("overview", "")
-        poster_path = movie.get("poster_path")
-        fanart_path = movie.get("backdrop_path")
-        rating = movie.get("vote_average", 0)
+        poster = ""
+        fanart = ""
 
-        poster = f"https://image.tmdb.org/t/p/original{poster_path}" if poster_path else ""
-        fanart = f"https://image.tmdb.org/t/p/original{fanart_path}" if fanart_path else ""
-
-        cast_list = []
-        cast_names = []
-
-        if movie_id:
-            credits_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}"
-            credits_data = json.loads(urlopen(credits_url).read().decode("utf-8"))
-
-            for c in credits_data.get("cast", [])[:8]:
-                cast_list.append({
-                    "name": c.get("name"),
-                    "role": c.get("character")
-                })
-                cast_names.append(c.get("name"))
+        if movie.get("poster_path"):
+            poster = "https://image.tmdb.org/t/p/original" + movie["poster_path"]
+        if movie.get("backdrop_path"):
+            fanart = "https://image.tmdb.org/t/p/original" + movie["backdrop_path"]
 
         return {
-            "plot": plot,
+            "plot": movie.get("overview", ""),
             "poster": poster,
             "fanart": fanart,
-            "rating": rating,
-            "cast": cast_list,
-            "cast_text": ", ".join(cast_names)
+            "rating": movie.get("vote_average", 0),
+            "cast_text": ""
         }
 
-    except Exception:
+    except Exception as e:
+        xbmc.log("[MoinuMovies] TMDB error: " + str(e), xbmc.LOGERROR)
         return {}
 
 # ===============================
 # MAIN
 # ===============================
 try:
-    response = urlopen(JSON_URL)
+    # ---- SAFE JSON LOAD ----
+    req = Request(JSON_URL, headers={"User-Agent": "Mozilla/5.0"})
+    response = urlopen(req, timeout=20)
     data = json.loads(response.read().decode("utf-8"))
 
     for movie in data.get("movies", []):
-        tmdb = get_tmdb_info(movie.get("title", ""), movie.get("year", ""))
+        tmdb = get_tmdb_info(movie.get("title", ""), movie.get("year", "")) or {}
 
         li = xbmcgui.ListItem(label=movie.get("title", "Movie"))
+        li.setProperty("IsPlayable", "true")
 
         # Artwork
         li.setArt({
@@ -107,41 +101,27 @@ try:
             "fanart": tmdb.get("fanart") or movie.get("fanart", "")
         })
 
-        # Plot + Cast
-        plot_text = tmdb.get("plot", "")
-        if tmdb.get("cast_text"):
-            plot_text += "\n\nCast: " + tmdb.get("cast_text")
-
+        # Info
         li.setInfo("video", {
             "title": movie.get("title", ""),
             "year": movie.get("year", ""),
-            "plot": plot_text,
+            "plot": tmdb.get("plot", ""),
             "rating": tmdb.get("rating", 0)
         })
-
-        if tmdb.get("cast"):
-            li.setCast(tmdb["cast"])
 
         # Context menu
         context_items = []
         if movie.get("trailer"):
-            context_items.append((
-                "🎬 Trailer",
-                f"PlayMedia({movie['trailer']})"
-            ))
+            context_items.append(("🎬 Trailer", f"PlayMedia({movie['trailer']})"))
         context_items.append(("ℹ Movie Info", "Action(Info)"))
         li.addContextMenuItems(context_items)
 
-        # 🔥 PLAY ACTION (pCloud Runtime Resolve)
+        # ---- PLAY ----
         page_url = movie.get("play_url", "")
         stream_url = resolve_pcloud(page_url)
 
         if not stream_url:
-            xbmcgui.Dialog().notification(
-                "Moinu Movies",
-                "pCloud stream resolve failed",
-                xbmcgui.NOTIFICATION_ERROR
-            )
+            xbmc.log("[MoinuMovies] Stream not resolved", xbmc.LOGERROR)
             continue
 
         xbmcplugin.addDirectoryItem(
@@ -153,9 +133,10 @@ try:
 
     xbmcplugin.endOfDirectory(handle)
 
-except Exception:
+except Exception as e:
+    xbmc.log("[MoinuMovies] MAIN error: " + str(e), xbmc.LOGERROR)
     xbmcgui.Dialog().notification(
         "Moinu Movies",
-        "JSON / TMDB Network Error",
+        "Network / JSON Error",
         xbmcgui.NOTIFICATION_ERROR
-    )
+        )
