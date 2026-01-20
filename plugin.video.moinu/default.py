@@ -16,8 +16,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # CONFIG
 # ===============================
 TMDB_API_KEY = "051ccf72e026820cb53b8b8531b6a2ba"
-JSON_URL = "https://raw.githubusercontent.com/MoinuNisa/moinu-movies/main/1080p_x264_pack.json"
-
+JSON_URL = "https://dl.dropboxusercontent.com/scl/fi/5cn3ryzl6kuxbgceyfin7/1080p_x264_pack.json?rlkey=qlmd22d76h8cd6a4r9f8b4z3q&dl=1"
 handle = int(sys.argv[1])
 
 # ===============================
